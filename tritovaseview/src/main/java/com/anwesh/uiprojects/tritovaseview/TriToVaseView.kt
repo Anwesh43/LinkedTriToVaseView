@@ -41,19 +41,19 @@ fun Canvas.drawTTVNode(i : Int, scale : Float, paint : Paint) {
     paint.color = foreColor
     paint.strokeWidth = Math.min(w, h) / strokeFactor
     paint.strokeCap = Paint.Cap.ROUND
-    val hSize : Float = size / Math.cos(deg * Math.PI/180).toFloat()
-    val x : Float = h * Math.sin(deg * Math.PI/180).toFloat()
+    val hSize : Float = (size) / Math.cos(deg * Math.PI/180).toFloat()
+    val x : Float = hSize * Math.sin(deg * Math.PI/180).toFloat()
     save()
     translate(w / 2, gap * (i + 1))
     rotate(90f * sc2 * i.sf())
     save()
     translate(0f, -size / 2)
-    drawLine(-x/2, 0f, x/2, 0f, paint)
+    drawLine(-x, 0f, x, 0f, paint)
     for (j in 0..(lines - 1)) {
         save()
-        translate(0f, -x / 2 * j.sjf())
-        rotate(-30f + 60f * sc1.divideScale(j,  lines))
-        drawLine(0f, 0f, -hSize, 0f, paint)
+        translate(x * j.sjf(), 0f)
+        rotate((-30f + 60f * sc1.divideScale(j,  lines)) * j.sjf())
+        drawLine(0f, 0f, 0f, -hSize, paint)
         restore()
     }
     restore()
