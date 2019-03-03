@@ -191,4 +191,26 @@ class TriToVaseView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : TriToVaseView) {
+
+        private val animator : Animator = Animator(view)
+        private val tts : TriToVase = TriToVase(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            tts.draw(canvas, paint)
+            animator.animate {
+                tts.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            tts.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
