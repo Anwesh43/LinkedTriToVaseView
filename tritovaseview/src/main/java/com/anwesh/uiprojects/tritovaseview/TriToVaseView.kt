@@ -213,4 +213,13 @@ class TriToVaseView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : TriToVaseView {
+            val view : TriToVaseView = TriToVaseView(activity)
+            activity.setContentView(view)
+            return view 
+        }
+    }
 }
